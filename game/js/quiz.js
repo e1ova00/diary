@@ -181,11 +181,15 @@ export function openMap() {
   panel.querySelector('[data-close]').onclick = close;
   panel.querySelectorAll('[data-tp]').forEach(b => b.onclick = () => { close(); hooks.onTeleport?.(+b.dataset.tp); });
   panel.querySelectorAll('[data-th]').forEach(b => b.onclick = () => { hooks.onTeleport?.(+b.dataset.th); openTheme(+b.dataset.th); });
-  panel.querySelector('[data-reset]').onclick = () => {
-    if (confirm('Точно сбросить все очки и прогресс?')) {
-      Object.assign(progress, { score: 0, best: {}, errors: [], streak: 0, bestStreak: 0, answered: 0, correct: 0, examsPassed: 0 });
-      save(); hooks.onProgress?.(); openMap();
+  const reset = panel.querySelector('[data-reset]');
+  reset.onclick = () => {
+    if (!reset.dataset.sure) {
+      reset.dataset.sure = '1';
+      reset.textContent = 'Точно сбросить очки и прогресс? Нажми ещё раз';
+      return;
     }
+    Object.assign(progress, { score: 0, best: {}, errors: [], streak: 0, bestStreak: 0, answered: 0, correct: 0, examsPassed: 0 });
+    save(); hooks.onProgress?.(); openMap();
   };
 }
 
