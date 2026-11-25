@@ -21,14 +21,14 @@
     <!-- START -->
     <section class="screen active" id="screen-start">
       <div class="badge-row">
-        <span class="chip">мем-тест</span><span class="chip">2 минуты</span><span class="chip">без регистрации и стыда</span>
+        <span class="chip">мем-тест по тренду из тиктока</span><span class="chip">3 минуты</span><span class="chip">без регистрации и стыда</span>
       </div>
       <h1 class="title">
         <span class="word dirty">грязнулька</span>
         <span class="or">или</span>
         <span class="word clean">чистюлька?</span>
       </h1>
-      <p class="lead">12 вопросов — и наука* скажет, сколько в тебе грязнульки, сколько чистюльки и есть ли в тебе <b class="shb-tag" title="что такое ШБ — знают только ШБ">ШБ</b>.</p>
+      <p class="lead"><span id="qcount">18</span> вопросов — и наука* скажет, сколько в тебе грязнульки, сколько чистюльки, есть ли в тебе <b class="shb-tag" title="что такое ШБ — знают только ШБ">ШБ</b> и не серьёзка ли ты часом.</p>
       <p class="label">для начала, ты:</p>
       <div class="gender">
         <button class="gbtn girl" data-gender="girl">
@@ -68,6 +68,7 @@
       <div class="result-emoji" id="r-emoji">🫧</div>
       <h2 class="result-title" id="r-title"></h2>
       <p class="result-desc" id="r-desc"></p>
+      <p class="percentile" id="r-percentile"></p>
 
       <div class="meters">
         <div class="meter">
@@ -82,9 +83,31 @@
           <div class="meter-head"><span>ШБ-индекс</span><b><span id="m-shb">0</span>%</b></div>
           <div class="bar"><div class="bar-fill shb" id="b-shb"></div></div>
         </div>
+        <div class="meter">
+          <div class="meter-head"><span>индекс лицемерия</span><b><span id="m-hyp">0</span>%</b></div>
+          <div class="bar"><div class="bar-fill hyp" id="b-hyp"></div></div>
+          <p class="meter-note" id="r-hyp-line"></p>
+        </div>
       </div>
 
       <div class="facts" id="r-facts"></div>
+
+      <div class="panel">
+        <h3>🔬 разбор по категориям</h3>
+        <div class="cats" id="r-cats"></div>
+        <p class="panel-note" id="r-cats-note"></p>
+      </div>
+
+      <div class="panel">
+        <h3>🕵️ тебя выдало</h3>
+        <ol class="evidence" id="r-evidence"></ol>
+        <p class="panel-note"><b>грин-флаг:</b> <span id="r-green"></span></p>
+      </div>
+
+      <div class="panel match">
+        <h3>💘 идеальная пара</h3>
+        <p id="r-match"></p>
+      </div>
 
       <div class="tips">
         <div class="tip-card">
@@ -96,6 +119,19 @@
           <ul id="tips-dirty"></ul>
         </div>
       </div>
+
+      <details class="panel dict">
+        <summary>📚 словарик тренда</summary>
+        <dl>
+          <dt>грязнулька</dt><dd>тиктоковский сленг осени 2026: так называют раскрепощённую девушку с «тусовочной» репутацией. К грязи отношения не имеет. Типичные маркеры из роликов: всё чёрное, вписки, энергетики, электронки, общение с парнями старше.</dd>
+          <dt>серьёзка</dt><dd>антипод грязнульки: скромная, домашняя, труднодоступная.</dd>
+          <dt>грязнулька в клёшах</dt><dd>почти комплимент: винтажный стиль и харизма.</dd>
+          <dt>«жениться пока рано, карьера важнее»</dt><dd>фраза, с которой гуляет один из популярных форматов тренда.</dd>
+          <dt>главный сюжет мемов</dt><dd>парень публично осуждает грязнулек, но тайно мечтает с ними общаться. Отсюда наш индекс лицемерия.</dd>
+          <dt>ШБ</dt><dd>знают только ШБ 🤫</dd>
+        </dl>
+        <p class="panel-note">В тиктоке грязнульками называют только девочек, и тренд за это критикуют за двойные стандарты. Мы за равноправие: мальчики тоже бывают грязнульками 💅</p>
+      </details>
 
       <div class="actions">
         <button class="btn primary" id="share">поделиться результатом</button>
