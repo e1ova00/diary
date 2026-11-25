@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Снежный забег ПДД</title>
+  <meta name="description" content="3D-игра для подготовки к экзамену ПДД: прыгай по льдинам зимней реки, проходи темы билетов и танцуй с друзьями.">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <div id="loading">❄ Загружаем зимний лес…</div>
+
+  <div class="hud-top">
+    <div class="card stats">
+      <div title="Очки"><span class="ico">❄</span><b id="hudScore">0</b><small>очков</small></div>
+      <div title="Пройдено мини-тем"><span class="ico">🏁</span><b id="hudSets">0/0</b><small>мини-тем</small></div>
+      <div title="Серия верных ответов"><span class="ico">🔥</span><b id="hudStreak">0</b><small>серия</small></div>
+    </div>
+    <div class="hud-buttons">
+      <button class="hbtn" id="btnMap" title="Карта тем (M)">🗺️<span>Темы</span></button>
+      <button class="hbtn" id="btnErrors" title="Работа над ошибками">❗<span>Ошибки</span><i id="errCount" hidden>0</i></button>
+      <button class="hbtn" id="btnExam" title="Экзамен">🎓<span>Экзамен</span></button>
+      <button class="hbtn" id="btnSound" title="Звук">🔊</button>
+    </div>
+  </div>
+
+  <div id="prompt" class="prompt"></div>
+  <div id="toast" class="toast"></div>
+  <div id="danceBanner" class="dance-banner"></div>
+  <div class="hint-keys">WASD / стрелки — бег · Пробел — прыжок · E — открыть тему · мышь — камера</div>
+
+  <div id="joy" class="joy"><div id="knob" class="knob"></div></div>
+  <button id="btnJump" class="tbtn jump" aria-label="Прыжок">⤒</button>
+  <button id="btnAction" class="tbtn action" aria-label="Открыть тему">✋</button>
+
+  <div id="overlay" class="overlay" hidden><div id="panel" class="panel" role="dialog" aria-modal="true"></div></div>
+
+  <div id="intro" class="overlay intro">
+    <div class="panel intro-panel">
+      <div class="intro-snow">❄ ❅ ❆</div>
+      <h1>Снежный забег ПДД</h1>
+      <p class="lead">Зимний лес, замёрзшая река и 26 островов — по одному на каждую тему экзаменационных билетов ПДД (категории A, B, M).</p>
+      <div class="row"><button class="btn primary big" id="btnPlay">▶ Играть</button></div>
+      <ul class="intro-list">
+        <li>🏃 Бегай и <b>прыгай по льдинам</b> от острова к острову — можно перепрыгивать темы в любом порядке.</li>
+        <li>🚪 Зайди в светящиеся ворота — внутри темы <b>мини-темы по 5 вопросов</b> с картинками из билетов.</li>
+        <li>❄ За верные ответы — очки, за серию — бонус. Ошибся не больше одного раза — <b>мини-танец!</b></li>
+        <li>🌟 Без ошибок или вся тема целиком — <b>большой танец с друзьями</b> и салют.</li>
+        <li>❗ Ошибки копятся в «Работе над ошибками», а 🎓 «Экзамен» — 20 случайных вопросов, как в ГИБДД.</li>
+      </ul>
+      <p class="muted small">Управление: WASD или стрелки, пробел — прыжок, E — открыть тему, мышью вращай камеру. На телефоне — джойстик слева и кнопки справа.</p>
+      <p class="muted tiny-note">Вопросы, картинки и пояснения — из базы билетов на drom.ru/pdd. Прогресс сохраняется в этом браузере.</p>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
