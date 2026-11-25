@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Грязнулька или чистюлька?</title>
+  <meta name="description" content="Мем-тест: насколько ты грязнулька, чистюлька и ШБ. Узнай за 2 минуты." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫧</text></svg>" />
+</head>
+<body data-theme="neutral">
+  <div class="blobs" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  </div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <main id="app">
+    <!-- START -->
+    <section class="screen active" id="screen-start">
+      <div class="badge-row">
+        <span class="chip">мем-тест</span><span class="chip">2 минуты</span><span class="chip">без регистрации и стыда</span>
+      </div>
+      <h1 class="title">
+        <span class="word dirty">грязнулька</span>
+        <span class="or">или</span>
+        <span class="word clean">чистюлька?</span>
+      </h1>
+      <p class="lead">12 вопросов — и наука* скажет, сколько в тебе грязнульки, сколько чистюльки и есть ли в тебе <b class="shb-tag" title="что такое ШБ — знают только ШБ">ШБ</b>.</p>
+      <p class="label">для начала, ты:</p>
+      <div class="gender">
+        <button class="gbtn girl" data-gender="girl">
+          <span class="gemoji">🎀</span><span>девочка</span>
+        </button>
+        <button class="gbtn boy" data-gender="boy">
+          <span class="gemoji">🧢</span><span>мальчик</span>
+        </button>
+      </div>
+      <p class="tiny">*наука не участвовала. всё не всерьёз, шутки 16+.</p>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="screen" id="screen-quiz">
+      <div class="progress"><div class="progress-fill" id="progress"></div></div>
+      <div class="qmeta"><span id="qnum">1 / 12</span><span id="qtag">разминка</span></div>
+      <div class="card" id="card">
+        <div class="qemoji" id="qemoji">🫧</div>
+        <h2 class="question" id="question"></h2>
+        <div class="chat" id="chat" hidden></div>
+        <div class="answers" id="answers"></div>
+      </div>
+    </section>
+
+    <!-- LOADING -->
+    <section class="screen" id="screen-loading">
+      <div class="loader">
+        <div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div>
+        <div class="loader-emoji">🧼</div>
+      </div>
+      <p class="loading-text" id="loading-text">считаем твои грехи…</p>
+    </section>
+
+    <!-- RESULT -->
+    <section class="screen" id="screen-result">
+      <p class="label">твой диагноз</p>
+      <div class="result-emoji" id="r-emoji">🫧</div>
+      <h2 class="result-title" id="r-title"></h2>
+      <p class="result-desc" id="r-desc"></p>
+
+      <div class="meters">
+        <div class="meter">
+          <div class="meter-head"><span>грязнулька</span><b><span id="m-dirty">0</span>%</b></div>
+          <div class="bar"><div class="bar-fill dirty" id="b-dirty"></div></div>
+        </div>
+        <div class="meter">
+          <div class="meter-head"><span>чистюлька</span><b><span id="m-clean">0</span>%</b></div>
+          <div class="bar"><div class="bar-fill clean" id="b-clean"></div></div>
+        </div>
+        <div class="meter">
+          <div class="meter-head"><span>ШБ-индекс</span><b><span id="m-shb">0</span>%</b></div>
+          <div class="bar"><div class="bar-fill shb" id="b-shb"></div></div>
+        </div>
+      </div>
+
+      <div class="facts" id="r-facts"></div>
+
+      <div class="tips">
+        <div class="tip-card">
+          <h3>🧼 как стать чистюлькой</h3>
+          <ul id="tips-clean"></ul>
+        </div>
+        <div class="tip-card">
+          <h3>😈 как стать грязнулькой</h3>
+          <ul id="tips-dirty"></ul>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="share">поделиться результатом</button>
+        <button class="btn ghost" id="restart">пройти ещё раз</button>
+      </div>
+      <p class="tiny" id="copied" hidden>скопировано, кидай в чат 💅</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
