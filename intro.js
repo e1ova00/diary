@@ -4,9 +4,9 @@
 
 (() => {
   const TRACK_URL = "music/dynasty.mp3";
-  const TRACK_BPM = 120;      // темп трека — поменяй, если танец не попадает в бит
-  const TRACK_START = 0;      // с какой секунды трека начинать
-  const SQUEAK_RATE = 1.3;    // насколько ускорить и поднять голос (1 — без эффекта)
+  const TRACK_BPM = 76;       // «Династия» ≈ 152 BPM, танцуем в половинном темпе
+  const TRACK_START = 1.545;  // в music/dynasty.mp3 вырезан кусок с 60 с; дроп на 1.545 с
+  const SQUEAK_RATE = 1.4;    // насколько ускорить и поднять голос (1 — без эффекта)
   const DANCE_SECONDS = 26;   // длина танца
   const SYNTH_BPM = 124;
 
@@ -255,7 +255,12 @@
   let danceStart = 0, lastBeat = -1;
 
   function beatNow() {
-    if (audio) return (audio.currentTime - TRACK_START) * TRACK_BPM / 60;
+    if (audio) {
+      // по времени трека, а если оно стоит (нет звукового устройства, буферизация) — по часам
+      const media = audio.currentTime - TRACK_START;
+      const wall = ((performance.now() - danceStart) / 1000) * SQUEAK_RATE;
+      return (media > 0.05 && Math.abs(media - wall) < 3 ? media : wall) * TRACK_BPM / 60;
+    }
     if (synth) return synth.beat();
     return 0;
   }
@@ -309,18 +314,24 @@
   }
 
   function startTrack() {
-    return new Promise((resolve) => {
+    return new Promise((res) => {
+      let done = false;
+      const resolve = (v) => { if (done) { if (v) v.pause(); return; } done = true; res(v); };
       const a = new Audio();
       a.preload = "auto";
       a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false; // эффект «белки»
       a.oncanplay = () => {
         a.oncanplay = null;
+        if (done) return;
         a.currentTime = TRACK_START; a.playbackRate = SQUEAK_RATE;
-        a.play().then(() => resolve(a)).catch(() => resolve(null));
+        a.play().then(() => {
+          if (a.currentTime < TRACK_START - 0.3) a.currentTime = TRACK_START; // повторная перемотка к дропу
+          resolve(a);
+        }).catch(() => resolve(null));
       };
       a.onerror = () => resolve(null);
       a.src = TRACK_URL;
-      setTimeout(() => resolve(null), 2500);
+      setTimeout(() => resolve(null), 6000);
     });
   }
 
