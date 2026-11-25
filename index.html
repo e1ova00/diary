@@ -17,6 +17,22 @@
   </div>
   <canvas id="fx" aria-hidden="true"></canvas>
 
+  <!-- INTRO: 3D-мультик -->
+  <div id="intro">
+    <div id="intro-stage" aria-hidden="true"></div>
+    <div id="intro-captions" aria-hidden="true"></div>
+    <div class="intro-start">
+      <p class="intro-kicker">премьера 🎬</p>
+      <h2 class="intro-title"><span class="dirty">грязнулька</span> <span class="amp">&amp;</span> <span class="clean">чистюлька</span></h2>
+      <p class="intro-sub">мультик перед тестом. включи звук 🔊</p>
+      <button class="btn primary intro-btn" id="intro-play">▶ смотреть мультик</button>
+    </div>
+    <div class="intro-end" id="intro-end" hidden>
+      <button class="btn primary intro-btn" id="intro-go">приступить к тесту 💅</button>
+    </div>
+    <button class="intro-skip" id="intro-skip">пропустить →</button>
+  </div>
+
   <main id="app">
     <!-- START -->
     <section class="screen active" id="screen-start">
@@ -142,5 +158,7 @@
   </main>
 
   <script src="app.js"></script>
+  <script src="vendor/three.min.js"></script>
+  <script src="intro.js"></script>
 </body>
 </html>
